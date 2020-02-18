@@ -1,0 +1,14 @@
+{
+  "name": "static-deploy-tool",
+  "version": "1.0.4",
+  "bin": {
+    "static-deploy-tool": "cli.js"
+  },
+  "repository": "git@github.com:wangsijie/static-deploy-tool.git",
+  "author": "wangsijie <i@sijie.wang>",
+  "license": "MIT",
+  "dependencies": {
+    "ali-oss": "^6.5.1",
+    "md5-file": "^4.0.0"
+  }
+}
