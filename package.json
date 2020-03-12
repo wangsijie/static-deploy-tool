@@ -1,6 +1,6 @@
 {
   "name": "static-deploy-tool",
-  "version": "1.0.4",
+  "version": "0.2.0",
   "bin": {
     "static-deploy-tool": "cli.js"
   },
@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "ali-oss": "^6.5.1",
+    "commander": "^4.1.1",
     "md5-file": "^4.0.0"
   }
 }
