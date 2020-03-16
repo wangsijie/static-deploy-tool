@@ -4,7 +4,7 @@ const sync = require('./sync');
 const put = require('./put');
 
 program
-    .version('0.2.0')
+    .version('0.3.1')
     .option('-k, --ak [ak]', 'Access Key Id')
     .option('-s, --sk [sk]', 'Secret Access Key')
     .option('-r, --region [region]', 'Region', 'oss-cn-shanghai')
