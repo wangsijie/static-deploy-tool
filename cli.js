@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander');
-const app = require('./app');
+const sync = require('./sync');
+const put = require('./put');
 
 program
     .version('0.2.0')
@@ -14,13 +15,28 @@ program
     .command('sync <local> <remote>')
     .action(async (local, remote) => {
         try {
-            await app({
+            await sync({
                 local,
                 remote,
                 aliyun: checkParams(),
             })
         } catch (e) {
             console.error(e);
+            process.exit(1);
+        }
+    })
+
+program
+    .command('put <local> <remote>')
+    .action(async (local, remote) => {
+        try {
+            await put({
+                local,
+                remote,
+                aliyun: checkParams(),
+            })
+        } catch (e) {
+            console.error(e.message);
             process.exit(1);
         }
     })
