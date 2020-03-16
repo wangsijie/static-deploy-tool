@@ -2,9 +2,10 @@
 const program = require('commander');
 const sync = require('./sync');
 const put = require('./put');
+const copy = require('./copy');
 
 program
-    .version('0.3.1')
+    .version('0.4.0')
     .option('-k, --ak [ak]', 'Access Key Id')
     .option('-s, --sk [sk]', 'Secret Access Key')
     .option('-r, --region [region]', 'Region', 'oss-cn-shanghai')
@@ -33,6 +34,21 @@ program
             await put({
                 local,
                 remote,
+                aliyun: checkParams(),
+            })
+        } catch (e) {
+            console.error(e.message);
+            process.exit(1);
+        }
+    })
+
+program
+    .command('copy <source> <dest>')
+    .action(async (source, dest) => {
+        try {
+            await copy({
+                source,
+                dest,
                 aliyun: checkParams(),
             })
         } catch (e) {
