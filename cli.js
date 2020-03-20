@@ -5,7 +5,7 @@ const put = require('./put');
 const copy = require('./copy');
 
 program
-    .version('0.4.1')
+    .version('0.4.2')
     .option('-k, --ak [ak]', 'Access Key Id')
     .option('-s, --sk [sk]', 'Secret Access Key')
     .option('-r, --region [region]', 'Region', 'oss-cn-shanghai')

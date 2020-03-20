@@ -1,6 +1,6 @@
 {
   "name": "static-deploy-tool",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "bin": {
     "static-deploy-tool": "cli.js"
   },
