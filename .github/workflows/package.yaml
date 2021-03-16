@@ -1,0 +1,18 @@
+name: Build Images
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: login docker
+        run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u wangsijie --password-stdin
+      - name: build
+        run: docker build -t static-deploy-tool .
+      - name: push
+        run: docker push static-deploy-tool
