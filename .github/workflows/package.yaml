@@ -13,6 +13,6 @@ jobs:
       - name: login docker
         run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u wangsijie --password-stdin
       - name: build
-        run: docker build -t static-deploy-tool .
+        run: docker build -t wangsijie/static-deploy-tool .
       - name: push
-        run: docker push static-deploy-tool
+        run: docker push wangsijie/static-deploy-tool
