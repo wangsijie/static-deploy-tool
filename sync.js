@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const md5FileCb = require('md5-file');
 const getClient = require('./oss');
+const resolveObject = require('./resolve-object');
 
 let client;
 
@@ -31,7 +32,7 @@ function walk(dir) {
 async function upload(local, remote) {
     for (const file of list) {
         const hash = await md5File(file);
-        const remotePath = file.replace(local, remote);
+        const remotePath = resolveObject(file.replace(local, remote));
         const remoteFile = hashes.find(o => o.name === remotePath);
         if (remoteFile && remoteFile.hash === hash.toUpperCase()) {
             console.log('skip: ' + file);

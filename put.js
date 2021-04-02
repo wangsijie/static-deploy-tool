@@ -1,5 +1,6 @@
 const fs = require('fs');
 const getClient = require('./oss');
+const resolveObject = require('./resolve-object');
 
 module.exports = async ({ aliyun, local, remote }) => {
     const client = getClient(aliyun);
@@ -15,13 +16,13 @@ module.exports = async ({ aliyun, local, remote }) => {
     }
     const upload = async () => {
         try {
-            await client.multipartUpload(remote, local, {
+            return await client.multipartUpload(resolveObject(remote), local, {
                 checkpoint,
                 progress: asyncProgress
             });
         } catch (e) {
             tryTime--;
-            if (tryTime) {
+            if (tryTime && !process.env.DISABLE_RETRY) {
                 console.log(`Retrying: ${local}`);
                 await new Promise(r => setTimeout(r, 1000))
                 await upload();
@@ -30,5 +31,5 @@ module.exports = async ({ aliyun, local, remote }) => {
             }
         }
     }
-    await upload();
+    return await upload();
 }

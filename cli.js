@@ -5,10 +5,10 @@ const put = require('./put');
 const copy = require('./copy');
 
 program
-    .version('0.4.2')
+    .version('1.0.0')
     .option('-k, --ak [ak]', 'Access Key Id')
     .option('-s, --sk [sk]', 'Secret Access Key')
-    .option('-r, --region [region]', 'Region', 'oss-cn-shanghai')
+    .option('-r, --region [region]', 'Region')
     .option('-b, --bucket [bucket]', 'Bucket')
     .option('-e, --endpoint [endpoint]', 'Optional, will override region setting')
 
@@ -60,7 +60,11 @@ program
 program.parse(process.argv);
 
 function checkParams() {
-    const { ak, sk, region, bucket, endpoint } = program;
+    const ak = program.ak || (process.env.NO_ENV ? null : process.env.OSS_AK);
+    const sk = program.sk || (process.env.NO_ENV ? null : process.env.OSS_SK);
+    const region = program.region || (process.env.NO_ENV ? null : process.env.OSS_REGION);
+    const bucket = program.bucket || (process.env.NO_ENV ? null : process.env.OSS_BUCKET);
+    const endpoint = program.endpoint || (process.env.NO_ENV ? null : process.env.OSS_ENDPOINT);
     if (!ak) {
         console.error('AK is missing');
         process.exit(1)
@@ -72,6 +76,10 @@ function checkParams() {
     if (!bucket) {
         console.error('Bucket is missing');
         process.exit(1)
+    }
+    if (!region && !endpoint) {
+        console.error('Region or endpoint is missing');
+        process.exit(1);
     }
     return { ak, sk, region, bucket, endpoint };
 }
