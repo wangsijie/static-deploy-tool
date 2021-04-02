@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn
       - name: prepare env
         run: |
           echo OSS_AK=${{ secrets.OSS_AK }} > .env
@@ -18,7 +17,7 @@ jobs:
           echo OSS_BUCKET=${{ secrets.OSS_BUCKET }} >> .env
           echo OSS_REGION=${{ secrets.OSS_REGION }} >> .env
           echo DISABLE_RETRY=1 >> .env
-      - run: yarn test
+      - run: yarn
       - name: login docker
         run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u wangsijie --password-stdin
       - name: build
