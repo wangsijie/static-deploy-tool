@@ -5,7 +5,7 @@ const put = require('./put');
 const copy = require('./copy');
 
 program
-    .version('1.0.6')
+    .version('1.1.0')
     .option('-k, --ak [ak]', 'Access Key Id')
     .option('-s, --sk [sk]', 'Secret Access Key')
     .option('-r, --region [region]', 'Region')
@@ -60,11 +60,11 @@ program
 program.parse(process.argv);
 
 function checkParams() {
-    const ak = program.ak || (process.env.NO_ENV ? null : process.env.OSS_AK);
-    const sk = program.sk || (process.env.NO_ENV ? null : process.env.OSS_SK);
-    const region = program.region || (process.env.NO_ENV ? null : process.env.OSS_REGION);
-    const bucket = program.bucket || (process.env.NO_ENV ? null : process.env.OSS_BUCKET);
-    const endpoint = program.endpoint || (process.env.NO_ENV ? null : process.env.OSS_ENDPOINT);
+    const ak = program.ak || process.env.OSS_AK;
+    const sk = program.sk || process.env.OSS_SK;
+    const region = program.region || process.env.OSS_REGION;
+    const bucket = program.bucket || process.env.OSS_BUCKET;
+    const endpoint = program.endpoint || process.env.OSS_ENDPOINT;
     if (!ak) {
         console.error('AK is missing');
         process.exit(1)

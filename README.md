@@ -62,10 +62,22 @@ Options:
   -V, --version              output the version number
   -k, --ak [ak]              Access Key Id
   -s, --sk [sk]              Secret Access Key
-  -r, --region [region]      Region (default: "oss-cn-shanghai")
+  -r, --region [region]      Region
   -b, --bucket [bucket]      Bucket
   -e, --endpoint [endpoint]  Optional, will override region setting
   -h, --help                 output usage information
+```
+
+### 环境变量
+
+除了用参数，也可以用环境变量
+
+```
+OSS_AK 等同于 --ak
+OSS_SK 等同于 --sk
+OSS_REGION 等同于 --region
+OSS_BUCKET 等同于 --bucket
+OSS_ENDPOINT 等同于 --endpoint
 ```
 
 ### 阿里云内网加速
