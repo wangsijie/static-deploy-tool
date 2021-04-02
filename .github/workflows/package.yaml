@@ -1,4 +1,4 @@
-name: Build Images
+name: test and push docker
 
 on:
   push:
@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: yarn
+      - run: yarn test
+        env:
+          OSS_AK: ${{ secrets.OSS_AK }}
+          OSS_SK: ${{ secrets.OSS_SK }}
+          OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+          OSS_REGION: ${{ secrets.OSS_REGION }}
+          DISABLE_RETRY: '1'
       - name: login docker
         run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u wangsijie --password-stdin
       - name: build
