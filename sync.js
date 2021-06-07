@@ -26,7 +26,17 @@ function walk(dir) {
         } else {
             list.push(fileDir);
         }
-    })
+    });
+    // index.html文件最后上传，确保部署顺序
+    list.sort((a, b) => {
+        if (/index\.html?$/.test(a)) {
+            return 1;
+        }
+        if (/index\.html?$/.test(b)) {
+            return -1;
+        }
+        return 0;
+    });
 }
 
 async function upload(local, remote) {
@@ -92,6 +102,9 @@ const app = async ({ aliyun, local, remote }) => {
     await getHashes(remote);
     await upload(local, remote);
     await clean(local, remote);
+    return {
+        localFiles: list,
+    };
 }
 
 module.exports = app;

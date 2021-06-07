@@ -28,6 +28,8 @@ static-deploy-tool sync build production/home -k LTAI4Fnxxxxx -s 1wWQo9JQpSxxxx 
 
 该命令会首先逐个上传本地文件到远程目录，并根据md5比对跳过已有文件。之后**删除**远程存在但本地没有的文件。
 
+如果包含`index.html`或`index.htm`文件，则这类文件会在最后被上传，确保所以资源上传完毕后再更新index
+
 ### 上传大文件到远程
 
 ```bash
