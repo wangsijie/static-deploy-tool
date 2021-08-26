@@ -99,3 +99,17 @@ static-deploy-tool sync build production/home -k LTAI4Fnxxxxx -s 1wWQo9JQpSxxxx 
 ```bash
 static-deploy-tool sync build production/home -k LTAI4Fnxxxxx -s 1wWQo9JQpSxxxx -b my-bucket -e oss-accelerate.aliyuncs.com
 ```
+
+## 使用 Github Action
+
+```yaml
+- uses: wangsijie/static-deploy-tool
+  with:
+    oss-ak: ${{ secrets.OSS_AK }}
+    oss-sk: ${{ secrets.OSS_SK }}
+    oss-region: ${{ secrets.OSS_REGION }}
+    oss-bucket: ${{ secrets.OSS_BUCKET }}
+    oss-endpoint: oss-accelerate.aliyuncs.com
+    local-path: __tests__/files
+    remote-path: static-deploy-tool-test/action-sync
+```
