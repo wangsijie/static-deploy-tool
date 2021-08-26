@@ -21,6 +21,7 @@ jobs:
   action-test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./
         with:
           oss-ak: ${{ secrets.OSS_AK }}
