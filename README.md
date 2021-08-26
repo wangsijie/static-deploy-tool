@@ -103,7 +103,7 @@ static-deploy-tool sync build production/home -k LTAI4Fnxxxxx -s 1wWQo9JQpSxxxx 
 ## 使用 Github Action
 
 ```yaml
-- uses: wangsijie/static-deploy-tool
+- uses: wangsijie/static-deploy-tool@v1
   with:
     oss-ak: ${{ secrets.OSS_AK }}
     oss-sk: ${{ secrets.OSS_SK }}
