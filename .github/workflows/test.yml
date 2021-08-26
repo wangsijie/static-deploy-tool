@@ -1,0 +1,31 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install
+      - run: yarn test
+        env:
+          OSS_AK: ${{ secrets.OSS_AK }}
+          OSS_SK: ${{ secrets.OSS_SK }}
+          OSS_REGION: ${{ secrets.OSS_REGION }}
+          OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+  action-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./
+        with:
+          oss-ak: ${{ secrets.OSS_AK }}
+          oss-sk: ${{ secrets.OSS_SK }}
+          oss-region: ${{ secrets.OSS_REGION }}
+          oss-bucket: ${{ secrets.OSS_BUCKET }}
+          local-path: __tests__/files
+          remote-path: static-deploy-tool-test/action-sync

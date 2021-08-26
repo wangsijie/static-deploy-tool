@@ -1,0 +1,40 @@
+name: Deploy To OSS
+description: sync a folder to oss
+inputs:
+  oss-ak:
+    description: 'oss access key id'
+    required: true
+  oss-sk:
+    description: 'oss access key secret'
+    required: true
+  oss-bucket:
+    description: 'oss bucket name'
+    required: true
+  oss-region:
+    description: 'oss region'
+    required: true
+  oss-endpoint:
+    description: 'optional, custom oss endpoint'
+    required: false
+  local-path:
+    description: 'local folder path'
+    required: true
+  remote-path:
+    description: 'remote path (oss prefix)'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v2
+    - name: install static-deploy-tool
+      shell: bash
+      run: npm i -g static-deploy-tool
+    - name: run sync
+      shell: bash
+      run: static-deploy-tool sync "${{ inputs.local-path }}" "${{ inputs.remote-path }}"
+      env:
+        OSS_AK: ${{ inputs.oss-ak }}
+        OSS_SK: ${{ inputs.oss-sk }}
+        OSS_REGION: ${{ inputs.oss-region }}
+        OSS_BUCKET: ${{ inputs.oss-bucket }}
+        OSS_ENDPOINT: ${{ inputs.oss-endpoint }}
