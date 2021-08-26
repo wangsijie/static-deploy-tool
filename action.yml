@@ -1,5 +1,7 @@
 name: Deploy To OSS
 description: sync a folder to oss
+icon: upload-cloud
+color: orange
 inputs:
   oss-ak:
     description: 'oss access key id'
